@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Logs_Screens/Login/login.dart';
-import '../dashboard/deshboard.dart';
+import 'login_screen.dart';
+import 'deshboard.dart';
 
 class Checkinoutscreen extends StatelessWidget {
   const Checkinoutscreen({super.key});

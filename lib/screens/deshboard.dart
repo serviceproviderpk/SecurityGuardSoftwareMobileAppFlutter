@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 
-import '../../reusable_files/cards.dart';
-import 'screens/apply_leave/my_leaves.dart';
-import 'screens/attendace_history/my_attendance.dart';
-import 'screens/leave_balance/my_leave_balance.dart';
-import 'screens/my_petrols/my_petrol.dart';
-import 'screens/my_schedule/my_schedule.dart';
-import 'screens/notifications/your_notifications.dart';
-import 'screens/system_messages/system_msgs.dart';
-import 'screens/visite_website/visite_website.dart';
+import '../widgets/cards.dart';
+import 'my_leaves.dart';
+import 'my_attendance.dart';
+import 'my_leave_balance.dart';
+import 'my_petrol.dart';
+import 'my_schedule.dart';
+import 'your_notifications.dart';
+import 'system_messages/system_msgs.dart';
+import 'visite_website.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});

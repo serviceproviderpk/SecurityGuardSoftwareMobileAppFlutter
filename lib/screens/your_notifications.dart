@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../reusable_files/app_bar.dart';
-import '../../../../reusable_files/headings.dart';
-import '../../deshboard.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/headings.dart';
+import 'deshboard.dart';
 
 class yourNotifications extends StatelessWidget {
   const yourNotifications({super.key});

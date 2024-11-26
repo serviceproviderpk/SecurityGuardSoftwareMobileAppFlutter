@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../checkIn_checkOut/CheckInOutScreen.dart';
+import 'CheckInOutScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

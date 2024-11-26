@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../reusable_files/app_bar.dart';
+import '../../widgets/app_bar.dart';
 import 'system_msgs.dart';
 
 class InboxScreen extends StatelessWidget {

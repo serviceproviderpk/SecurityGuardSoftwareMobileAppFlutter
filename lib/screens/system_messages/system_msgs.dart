@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:securitymanagementsystem/Screens/deshboard.dart';
 
-import '../../../../reusable_files/app_bar.dart';
-import '../../../../reusable_files/cards.dart';
-import '../../deshboard.dart';
+import '../../widgets/app_bar.dart';
+import '../../widgets/cards.dart';
 import 'inbox.dart';
 import 'send_message/sendMessages.dart';
 
