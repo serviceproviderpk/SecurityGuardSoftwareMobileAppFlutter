@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:securitymanagementsystem/Screens/my_attendance.dart';
 
-
+import '../providers/card_notifier.dart';
 import '../widgets/cards.dart';
-import 'my_leaves.dart';
-import 'my_attendance.dart';
 import 'my_leave_balance.dart';
+import 'my_leaves.dart';
 import 'my_petrol.dart';
 import 'my_schedule.dart';
-import 'your_notifications.dart';
 import 'system_messages/system_msgs.dart';
 import 'visite_website.dart';
+import 'your_notifications.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -19,130 +20,171 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const yourNotifications()));
-                  },
-                  icon: const Icon(
-                    Icons.notifications,
-                    size: 60,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+
+              // First Row
+              Row(
+                children: [
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("Your Notifications")
+                        ..setIcon(Icons.notifications)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const yourNotifications(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'Your Notifications',
-                ),
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SystemMessages()));
-                  },
-                  icon: const Icon(
-                    Icons.message,
-                    size: 60,
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("System Messages")
+                        ..setIcon(Icons.message)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SystemMessages(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'System Messages',
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const myPetrol()));
-                  },
-                  icon: const Icon(
-                    Icons.directions_car_filled,
-                    size: 60,
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // Second Row
+              Row(
+                children: [
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("My Petrol")
+                        ..setIcon(Icons.directions_car_filled)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const myPetrol(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'My Petrol',
-                ),
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AttendanceScreen()));
-                  },
-                  icon: const Icon(
-                    Icons.list_alt,
-                    size: 60,
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("My Attendance")
+                        ..setIcon(Icons.list_alt)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AttendanceScreen(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'My Attendance',
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const mySchedule()));
-                  },
-                  icon: const Icon(
-                    Icons.schedule,
-                    size: 60,
+                ],
+              ),
+              const SizedBox(height: 12),
+              // Third Row
+              Row(
+                children: [
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("My Schedule")
+                        ..setIcon(Icons.schedule)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const mySchedule(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'My Schedule',
-                ),
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const myLeaves()));
-                  },
-                  icon: const Icon(
-                    Icons.unpublished_rounded,
-                    size: 60,
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("My Leaves")
+                        ..setIcon(Icons.unpublished_rounded)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const myLeaves(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'My Leaves',
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const myLeaveBalance()));
-                  },
-                  icon: const Icon(
-                    Icons.account_balance_wallet,
-                    size: 60,
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // Fourth Row
+              Row(
+                children: [
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("My Leave Balance")
+                        ..setIcon(Icons.account_balance_wallet)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const myLeaveBalance(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'My Leave Balance',
-                ),
-                ReusableCard(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const visitWebsite()));
-                  },
-                  icon: const Icon(
-                    Icons.search,
-                    size: 60,
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("Visit Website")
+                        ..setIcon(Icons.search)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const visitWebsite(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
                   ),
-                  text: 'Visit Website',
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/app_bar_notifier.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/headings.dart';
-import 'deshboard.dart';
 
 class yourNotifications extends StatelessWidget {
   const yourNotifications({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appBarNotifier = Provider.of<AppBarNotifier>(context, listen: false);
+
+    appBarNotifier.setTitle('Your Notifications');
+    appBarNotifier.setActions([
+      IconButton(
+        icon: const Icon(Icons.home),
+        onPressed: () {},
+      ),
+    ]);
+
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: CustomAppBar(title: 'Notifications', actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Dashboard()));
-                },
-                icon: const Icon(Icons.home))
-          ])),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: CustomAppBar()),
+      // child: CustomAppBar(title: 'Notifications', actions: [
+      //   IconButton(
+      //       onPressed: () {
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => Dashboard()));
+      //       },
+      //       icon: const Icon(Icons.home))
+      // ])),
+
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(

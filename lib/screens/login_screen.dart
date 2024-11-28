@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:securitymanagementsystem/screens/forget_password_screen.dart';
 
 import 'CheckInOutScreen.dart';
 
@@ -35,10 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       if (data['IsSuccess'] == true) {
-        // Navigate to the next screen
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const Checkinoutscreen()),
+          MaterialPageRoute(builder: (context) => CheckInOutScreen()),
         );
       } else {
         // Show error message
@@ -67,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -76,42 +75,56 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             TextField(
               controller: emailController,
-              decoration:
-                  InputDecoration(
-                      icon: Icon(Icons.email_sharp),
-                      labelText: 'Email', hintText: 'Your Email'),
+              decoration: const InputDecoration(
+                  icon: Icon(Icons.email_sharp),
+                  labelText: 'Email',
+                  hintText: 'Your Email'),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: passwordController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.password),
-                  labelText: 'Password', hintText: 'Your password'),
+                  icon: Icon(Icons.password),
+                  labelText: 'Password',
+                  hintText: 'Your password'),
               obscureText: true,
             ),
-            SizedBox(height: 32),
+            const SizedBox(
+              height: 10,
+            ),
+
+            // Forget Password
+            Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const PasswordResetPage()));
+                    },
+                    child: const Text(
+                      'Forget Password',
+                      style: TextStyle(color: Colors.blue),
+                    ))),
+            const SizedBox(height: 20),
             isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : SizedBox(
                     width: 200,
                     child: ElevatedButton.icon(
-                      icon: Icon(Icons.login),
-                      // Button Design
+                      icon: const Icon(Icons.login),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.blue,
-                        // Text color
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
-                          // Rounded corners
                         ),
                         elevation: 10,
-                        // Shadow elevation
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15), // Padding
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 15),
                       ),
-                      // Button navigation and conditions
                       onPressed: () {
                         final email = emailController.text.trim();
                         final password = passwordController.text.trim();

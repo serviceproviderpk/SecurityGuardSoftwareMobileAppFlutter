@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_bar_notifier.dart';
+
 
 class CustomAppBar extends StatelessWidget {
-  final String title;
-  final List<Widget>? actions;
-
-  const CustomAppBar({
-    super.key,
-    required this.title,
-    required this.actions,
-  });
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appBarNotifier = Provider.of<AppBarNotifier>(context);
+
     return AppBar(
-      automaticallyImplyLeading: false,
-      title: Center(
-          child: Text(
-        title,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      )),
-      actions: actions,
+      title: Text(appBarNotifier.title),
+      actions: appBarNotifier.actions,
     );
   }
 }

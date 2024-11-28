@@ -19,10 +19,10 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     fetchAttendanceData();
   }
 
+  // Fetching attendance data
   Future<void> fetchAttendanceData() async {
     final url = Uri.parse(
-        'https://sss.futureminutes.com/api/MyAttendanceHistory/Details?OrganizationID=146&BranchID=147&UsersProfileID=149'); // Replace with your API endpoint
-
+        'https://sss.futureminutes.com/api/MyAttendanceHistory/Details?OrganizationId=185&BranchId=186&UsersProfileId=187');
     try {
       final response = await http.get(url);
 
@@ -55,11 +55,25 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     }
   }
 
+  // Refresh the data
+  Future<void> refreshAttendanceData() async {
+    setState(() {
+      isLoading = true;
+    });
+    await fetchAttendanceData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Attendance Details'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: refreshAttendanceData,
+          ),
+        ],
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
@@ -67,40 +81,44 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               ? Center(
                   child:
                       Text(errorMessage, style: TextStyle(color: Colors.red)))
-              : ListView.builder(
-                  itemCount: attendanceContent.length,
-                  itemBuilder: (context, index) {
-                    final attendance = attendanceContent[index];
-                    final details = attendance['AttendanceDetails'] as List;
+              : RefreshIndicator(
+                  onRefresh: refreshAttendanceData, // Trigger on pull
+                  child: ListView.builder(
+                    itemCount: attendanceContent.length,
+                    itemBuilder: (context, index) {
+                      final attendance = attendanceContent[index];
+                      final details = attendance['AttendanceDetails'] as List;
 
-                    return Card(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      child: ExpansionTile(
-                        title: Text(
-                          'Date: ${attendance['AttendanceDate'].toString().split("T")[0]}',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                      return Card(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        child: ExpansionTile(
+                          title: Text(
+                            'Date: ${attendance['AttendanceDate'].toString().split("T")[0]}',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text('Remarks: ${attendance['Remarks']}'),
+                          children: details.map((detail) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      'Check-In Time: ${detail['CheckInTime']}'),
+                                  Text(
+                                      'Check-Out Time: ${detail['CheckOutTime']}'),
+                                  Text('Location IP: ${detail['LocationIP']}'),
+                                  Text(
+                                      'Hours Worked: ${detail['HoursWorked']} hrs'),
+                                ],
+                              ),
+                            );
+                          }).toList(),
                         ),
-                        subtitle: Text('Remarks: ${attendance['Remarks']}'),
-                        children: details.map((detail) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Check-In Time: ${detail['CheckInTime']}'),
-                                Text(
-                                    'Check-Out Time: ${detail['CheckOutTime']}'),
-                                Text('Location IP: ${detail['LocationIP']}'),
-                                Text(
-                                    'Hours Worked: ${detail['HoursWorked']} hrs'),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
     );
   }

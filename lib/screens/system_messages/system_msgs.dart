@@ -1,68 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/Screens/deshboard.dart';
+import 'package:securitymanagementsystem/Screens/system_messages/inbox.dart';
+import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
+import 'package:securitymanagementsystem/providers/card_notifier.dart';
+import 'package:securitymanagementsystem/widgets/cards.dart';
 
 import '../../widgets/app_bar.dart';
-import '../../widgets/cards.dart';
-import 'inbox.dart';
 import 'send_message/sendMessages.dart';
 
-class SystemMessages extends StatefulWidget implements PreferredSizeWidget {
+class SystemMessages extends StatelessWidget {
   const SystemMessages({super.key});
 
   @override
-  State<SystemMessages> createState() => _SystemMessagesState();
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => throw UnimplementedError();
-}
-
-class _SystemMessagesState extends State<SystemMessages> {
-  @override
   Widget build(BuildContext context) {
+    // calling and setting the notifier
+    final appBarNotifier = Provider.of<AppBarNotifier>(context, listen: false);
+
+    appBarNotifier.setTitle('System Messages');
+    appBarNotifier.setActions([
+      IconButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => const Dashboard()));
+          },
+          icon: const Icon(Icons.home))
+    ]);
+
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(
-          title: 'System Messages',
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Dashboard()));
-              },
-              icon: const Icon(Icons.home),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 190,
+              width: 190,
+              child: ChangeNotifierProvider(
+                create: (_) => CardNotifier()
+                  ..setTitle('Inbox')
+                  ..setIcon(Icons.inbox)
+                  ..setAction(
+                    () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => InboxScreen()));
+                    },
+                  ),
+                child: const CustomCard(),
+              ),
+            ),
+            // ReusableCard(
+            //   onTap: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => InboxScreen()));
+            //   },
+            //   icon: const Icon(
+            //     Icons.inbox,
+            //     size: 60,
+            //   ),
+            //   text: 'Inbox',
+            // ),
+
+            SizedBox(
+              height: 190,
+              width: 190,
+              child: ChangeNotifierProvider(
+                create: (_) => CardNotifier()
+                  ..setTitle('Send Message')
+                  ..setIcon(Icons.send)
+                  ..setAction(
+                    () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SendMessagesScreen()));
+                    },
+                  ),
+                child: const CustomCard(),
+              ),
             ),
           ],
         ),
-      ),
-      body: Column(
-        children: [
-          ReusableCard(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => InboxScreen()));
-            },
-            icon: const Icon(
-              Icons.inbox,
-              size: 60,
-            ),
-            text: 'Inbox',
-          ),
-          ReusableCard(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SendMessagesScreen()));
-            },
-            icon: const Icon(
-              Icons.send,
-              size: 60,
-            ),
-            text: 'Send Messages',
-          ),
-        ],
       ),
     );
   }
