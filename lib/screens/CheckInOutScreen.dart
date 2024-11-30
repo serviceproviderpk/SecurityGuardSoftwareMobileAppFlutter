@@ -5,7 +5,7 @@ import 'package:securitymanagementsystem/providers/card_notifier.dart';
 import 'package:securitymanagementsystem/widgets/cards.dart';
 import 'package:securitymanagementsystem/widgets/headings.dart';
 
-import '../providers/api_service.dart';
+import '../services/api_service.dart';
 
 class CheckInOutScreen extends StatefulWidget {
   const CheckInOutScreen({super.key});

@@ -1,4 +1,4 @@
-#Thu Nov 28 17:39:54 PKT 2024
+#Sat Nov 30 16:09:32 PKT 2024
 base.0=C\:\\Users\\ukkha\\StudioProjects\\securitymanagementsystem\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\ukkha\\StudioProjects\\securitymanagementsystem\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\ukkha\\StudioProjects\\securitymanagementsystem\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex

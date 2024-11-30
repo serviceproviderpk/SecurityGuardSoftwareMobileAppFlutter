@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:securitymanagementsystem/Screens/my_attendance.dart';
+import 'package:securitymanagementsystem/view/attendance_view.dart';
 
 import '../providers/card_notifier.dart';
+import '../view/notifications_view.dart';
 import '../widgets/cards.dart';
 import 'my_leave_balance.dart';
 import 'my_leaves.dart';
@@ -10,13 +11,14 @@ import 'my_petrol.dart';
 import 'my_schedule.dart';
 import 'system_messages/system_msgs.dart';
 import 'visite_website.dart';
-import 'your_notifications.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    MediaQuery.of(context).size.height;
+    MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -40,7 +42,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const yourNotifications(),
+                              builder: (context) => NotificationScreen(),
                             ),
                           );
                         }),
@@ -96,7 +98,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AttendanceScreen(),
+                              builder: (context) => AttendanceView(),
                             ),
                           );
                         }),

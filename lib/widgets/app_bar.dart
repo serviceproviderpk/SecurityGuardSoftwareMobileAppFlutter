@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../providers/app_bar_notifier.dart';
 
-
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
 
@@ -12,7 +11,11 @@ class CustomAppBar extends StatelessWidget {
     final appBarNotifier = Provider.of<AppBarNotifier>(context);
 
     return AppBar(
-      title: Text(appBarNotifier.title),
+      title: Center(
+          child: Text(
+        appBarNotifier.title,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      )),
       actions: appBarNotifier.actions,
     );
   }
