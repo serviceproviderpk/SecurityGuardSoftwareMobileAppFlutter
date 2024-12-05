@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/Screens/deshboard.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
-import 'package:securitymanagementsystem/services/api_service.dart';
 import 'package:securitymanagementsystem/widgets/app_bar.dart';
 
+import '../services/notification_api_services.dart';
 import '../view_models/notifications_viewmodel.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -31,8 +31,9 @@ class NotificationScreen extends StatelessWidget {
         child: CustomAppBar(),
       ),
       body: ChangeNotifierProvider(
-        create: (_) => NotificationViewModel(apiService: ApiService())
-          ..fetchNotifications(98),
+        create: (_) =>
+            NotificationViewModel(apiService: NotificationsApiServices())
+              ..fetchNotifications(98),
         child: Consumer<NotificationViewModel>(
           builder: (context, viewModel, _) {
             if (viewModel.isLoading) {

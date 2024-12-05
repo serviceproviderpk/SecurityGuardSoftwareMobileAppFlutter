@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:securitymanagementsystem/services/api_service.dart';
 
 import '../models/notifications_model.dart';
+import '../services/notification_api_services.dart';
 
 class NotificationViewModel with ChangeNotifier {
-  final ApiService _apiService;
+  final NotificationsApiServices _apiService;
   List<NotificationModel> _notifications = [];
 
   bool _isLoading = true;
 
-  NotificationViewModel({required ApiService apiService})
+  NotificationViewModel({required NotificationsApiServices apiService})
       : _apiService = apiService;
 
   List<NotificationModel> get notifications => _notifications;

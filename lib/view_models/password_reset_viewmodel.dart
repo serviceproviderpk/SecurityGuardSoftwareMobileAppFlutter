@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:securitymanagementsystem/services/api_service.dart';
+
+import '../services/forget_api_services.dart';
 
 class PasswordResetViewModel extends ChangeNotifier {
   final ResetApiService _resetApiService = ResetApiService();

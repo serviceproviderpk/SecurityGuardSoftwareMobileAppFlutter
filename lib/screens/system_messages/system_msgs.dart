@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/Screens/deshboard.dart';
-import 'package:securitymanagementsystem/Screens/system_messages/inbox.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
 import 'package:securitymanagementsystem/providers/card_notifier.dart';
 import 'package:securitymanagementsystem/widgets/cards.dart';
 
+import '../../view/inbox_view.dart';
 import '../../widgets/app_bar.dart';
 import 'send_message/sendMessages.dart';
 
@@ -46,8 +46,8 @@ class SystemMessages extends StatelessWidget {
                   ..setIcon(Icons.inbox)
                   ..setAction(
                     () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => InboxScreen()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => InboxView()));
                     },
                   ),
                 child: const CustomCard(),

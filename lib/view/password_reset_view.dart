@@ -37,8 +37,6 @@ class PasswordResetView extends StatelessWidget {
                   hintText: "Enter your registered email",
                   hintStyle: TextStyle(color: Colors.grey.shade400),
                   icon: const Icon(Icons.attach_email),
-                  errorText:
-                      viewModel.email.isEmpty ? "Email can't be empty" : null,
                 ),
               ),
 

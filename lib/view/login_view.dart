@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Screens/CheckInOutScreen.dart';
 import '../view_models/login_viewmodel.dart';
+import 'checked_inout_view.dart';
 import 'password_reset_view.dart';
 
 class LoginView extends StatelessWidget {
