@@ -10,7 +10,7 @@ class InboxView extends StatefulWidget {
 class _InboxViewState extends State<InboxView> {
   List<dynamic> messages = [];
   String statusMessage = 'Loading...';
-  List<bool> isExpandedList = []; // To track dropdown state for each card
+  List<bool> isExpandedList = [];
 
   Future<void> fetchMessages() async {
     final Dio dio = Dio();
@@ -21,8 +21,7 @@ class _InboxViewState extends State<InboxView> {
       if (response.data['IsSuccess'] == true) {
         setState(() {
           messages = response.data['Content'] ?? [];
-          isExpandedList = List<bool>.filled(
-              messages.length, false); // Initialize dropdown states
+          isExpandedList = List<bool>.filled(messages.length, false);
         });
       } else {
         setState(() {
