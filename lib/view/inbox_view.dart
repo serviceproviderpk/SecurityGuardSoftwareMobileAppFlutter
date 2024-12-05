@@ -1,107 +1,78 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
 
-class InboxView extends StatefulWidget {
-  @override
-  _InboxViewState createState() => _InboxViewState();
-}
+import '../view_models/inbox_viewmodel.dart';
 
-class _InboxViewState extends State<InboxView> {
-  List<dynamic> messages = [];
-  String statusMessage = 'Loading...';
-  List<bool> isExpandedList = [];
-
-  Future<void> fetchMessages() async {
-    final Dio dio = Dio();
-    try {
-      final response = await dio.get(
-          'https://sss.futureminutes.com/api/SystemMessages/MyMessages?GuardId=98');
-
-      if (response.data['IsSuccess'] == true) {
-        setState(() {
-          messages = response.data['Content'] ?? [];
-          isExpandedList = List<bool>.filled(messages.length, false);
-        });
-      } else {
-        setState(() {
-          statusMessage = 'No data found or unsuccessful request.';
-        });
-      }
-    } catch (e) {
-      setState(() {
-        statusMessage = 'Error fetching messages: $e';
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchMessages();
-  }
+class InboxView extends StatelessWidget {
+  const InboxView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<InboxViewModel>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Security Guard Alerts'),
+        title: const Text('Security Guard Alerts'),
         backgroundColor: Colors.blue,
       ),
-      body: messages.isEmpty && statusMessage == 'Loading...'
-          ? Center(child: CircularProgressIndicator())
-          : messages.isEmpty
-              ? Center(child: Text(statusMessage))
-              : ListView.builder(
-                  itemCount: messages.length,
-                  itemBuilder: (context, index) {
-                    var message = messages[index];
-                    return Card(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              title:
-                                  Text(message['GuardName'] ?? 'Unknown Guard'),
-                              trailing: IconButton(
-                                icon: Icon(isExpandedList[index]
-                                    ? Icons.expand_less
-                                    : Icons.expand_more),
-                                onPressed: () {
-                                  setState(() {
-                                    isExpandedList[index] =
-                                        !isExpandedList[index];
-                                  });
-                                },
-                              ),
-                            ),
-                            if (isExpandedList[
-                                index]) // Show details if expanded
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Html(data: message['AlertMessage']),
-                                  SizedBox(height: 5),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Text(
-                                      message['AlertDateTime'] ?? '',
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.grey),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                          ],
+      body: Consumer<InboxViewModel>(
+        builder: (context, viewModel, child) {
+          if (viewModel.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (viewModel.messages.isEmpty) {
+            return Center(child: Text(viewModel.statusMessage));
+          }
+
+          return ListView.builder(
+            itemCount: viewModel.messages.length,
+            itemBuilder: (context, index) {
+              final message = viewModel.messages[index];
+              return Card(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        title: Text(message.guardName),
+                        trailing: IconButton(
+                          icon: Icon(viewModel.isExpandedList[index]
+                              ? Icons.expand_less
+                              : Icons.expand_more),
+                          onPressed: () {
+                            viewModel.toggleExpansion(index);
+                          },
                         ),
                       ),
-                    );
-                  },
+                      if (viewModel.isExpandedList[index])
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Html(data: message.alertMessage),
+                            const SizedBox(height: 5),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                message.alertDateTime,
+                                style: const TextStyle(
+                                    fontSize: 12, color: Colors.grey),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
 import 'package:securitymanagementsystem/view/login_view.dart';
 import 'package:securitymanagementsystem/view_models/attendance_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/inbox_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/login_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/password_reset_viewmodel.dart';
 
@@ -15,6 +16,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(
             create: (_) => AttendanceViewModel()..fetchAttendanceData()),
+        ChangeNotifierProvider(
+          create: (_) => InboxViewModel()..fetchMessages(98),
+        ),
       ],
       child: const MyApp(),
     ),
