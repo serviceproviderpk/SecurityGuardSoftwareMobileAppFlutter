@@ -187,6 +187,42 @@ class Dashboard extends StatelessWidget {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("Systems Alerts")
+                        ..setIcon(Icons.add_alert_outlined)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const myLeaveBalance(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
+                  ),
+                  Expanded(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CardNotifier()
+                        ..setTitle("Visit Website")
+                        ..setIcon(Icons.search)
+                        ..setAction(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const visitWebsite(),
+                            ),
+                          );
+                        }),
+                      child: const CustomCard(),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
