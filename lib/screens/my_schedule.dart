@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class mySchedule extends StatelessWidget {
-  const mySchedule({super.key});
+class MySchedule extends StatelessWidget {
+  const MySchedule({super.key});
 
   @override
   Widget build(BuildContext context) {

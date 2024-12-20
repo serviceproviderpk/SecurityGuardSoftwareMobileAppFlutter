@@ -19,7 +19,7 @@ class CustomCard extends StatelessWidget {
           elevation: 4,
           margin: const EdgeInsets.all(10.0),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -28,12 +28,21 @@ class CustomCard extends StatelessWidget {
                   size: 60.0,
                   color: Colors.blue,
                 ),
-                const SizedBox(height: 16.0),
-                Text(
-                  cardNotifier.title,
-                  style: const TextStyle(
-                    fontSize: 14.5,
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 15.0),
+                Container(
+                  width: 250,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      cardNotifier.title,
+                      style: const TextStyle(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],

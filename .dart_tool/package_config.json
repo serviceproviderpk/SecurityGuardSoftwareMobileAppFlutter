@@ -164,12 +164,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "plugin_platform_interface",
-      "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
       "name": "provider",
       "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
@@ -242,37 +236,13 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "webview_flutter",
-      "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-4.10.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
-      "name": "webview_flutter_android",
-      "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_android-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
-      "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_platform_interface-2.10.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///C:/Users/ukkha/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_wkwebview-3.16.3",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
       "name": "securitymanagementsystem",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-04T13:13:42.532627Z",
+  "generated": "2024-12-13T11:26:21.400585Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///C:/flutter/flutter",

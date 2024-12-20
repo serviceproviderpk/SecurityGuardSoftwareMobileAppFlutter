@@ -60,7 +60,7 @@ class CheckInOutScreen extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const Dashboard()),
+                        MaterialPageRoute(builder: (_) => Dashboard()),
                       );
                     },
                     label: headings().h3('Dashboard'),

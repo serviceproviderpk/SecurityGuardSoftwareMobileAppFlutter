@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:securitymanagementsystem/screens/my_schedule.dart';
 import 'package:securitymanagementsystem/view/attendance_view.dart';
 
 import '../providers/card_notifier.dart';
@@ -8,7 +9,6 @@ import '../widgets/cards.dart';
 import 'my_leave_balance.dart';
 import 'my_leaves.dart';
 import 'my_petrol.dart';
-import 'my_schedule.dart';
 import 'system_messages/system_msgs.dart';
 import 'visite_website.dart';
 
@@ -107,7 +107,9 @@ class Dashboard extends StatelessWidget {
                   ),
                 ],
               ),
+
               const SizedBox(height: 12),
+
               // Third Row
               Row(
                 children: [
@@ -120,7 +122,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const mySchedule(),
+                              builder: (context) => MySchedule(),
                             ),
                           );
                         }),
