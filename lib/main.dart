@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
-import 'package:securitymanagementsystem/view/login_view.dart';
 import 'package:securitymanagementsystem/view_models/attendance_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/inbox_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/leave_request_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/login_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/my_leaves_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/my_schedule_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/password_reset_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/post_notification_viewmodel.dart';
+
+import 'Screens/deshboard.dart';
 
 void main() {
   runApp(
@@ -17,8 +22,11 @@ void main() {
         ChangeNotifierProvider(
             create: (_) => AttendanceViewModel()..fetchAttendanceData()),
         ChangeNotifierProvider(
-          create: (_) => InboxViewModel()..fetchMessages(98),
-        ),
+            create: (_) => InboxViewModel()..fetchMessages()),
+        ChangeNotifierProvider(create: (_) => MyScheduleViewModel()),
+        ChangeNotifierProvider(create: (_) => MyLeavesViewmodel()),
+        ChangeNotifierProvider(create: (_) => PostNotificationViewModel()),
+        ChangeNotifierProvider(create: (context) => LeaveRequestViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -31,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LoginView(),
+      home: Dashboard(),
     );
   }
 }

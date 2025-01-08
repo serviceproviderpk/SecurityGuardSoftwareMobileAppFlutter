@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:securitymanagementsystem/screens/my_schedule.dart';
 import 'package:securitymanagementsystem/view/attendance_view.dart';
+import 'package:securitymanagementsystem/view/leave_request_view.dart';
+import 'package:securitymanagementsystem/view/my_leaves_view.dart';
+import 'package:securitymanagementsystem/view/my_schedule_view.dart';
 
 import '../providers/card_notifier.dart';
 import '../view/notifications_view.dart';
 import '../widgets/cards.dart';
-import 'my_leave_balance.dart';
-import 'my_leaves.dart';
 import 'my_petrol.dart';
 import 'system_messages/system_msgs.dart';
 import 'visite_website.dart';
@@ -53,7 +53,7 @@ class Dashboard extends StatelessWidget {
                     child: ChangeNotifierProvider(
                       create: (_) => CardNotifier()
                         ..setTitle("System Messages")
-                        ..setIcon(Icons.message)
+                        ..setIcon(Icons.notification_important)
                         ..setAction(() {
                           Navigator.push(
                             context,
@@ -122,7 +122,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MySchedule(),
+                              builder: (context) => MyScheduleView(),
                             ),
                           );
                         }),
@@ -138,7 +138,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const myLeaves(),
+                              builder: (context) => const MyLeavesView(),
                             ),
                           );
                         }),
@@ -156,49 +156,13 @@ class Dashboard extends StatelessWidget {
                   Expanded(
                     child: ChangeNotifierProvider(
                       create: (_) => CardNotifier()
-                        ..setTitle("My Leave Balance")
+                        ..setTitle("Apply Leave")
                         ..setIcon(Icons.account_balance_wallet)
                         ..setAction(() {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const myLeaveBalance(),
-                            ),
-                          );
-                        }),
-                      child: const CustomCard(),
-                    ),
-                  ),
-                  Expanded(
-                    child: ChangeNotifierProvider(
-                      create: (_) => CardNotifier()
-                        ..setTitle("Visit Website")
-                        ..setIcon(Icons.search)
-                        ..setAction(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const visitWebsite(),
-                            ),
-                          );
-                        }),
-                      child: const CustomCard(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: ChangeNotifierProvider(
-                      create: (_) => CardNotifier()
-                        ..setTitle("Systems Alerts")
-                        ..setIcon(Icons.add_alert_outlined)
-                        ..setAction(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const myLeaveBalance(),
+                              builder: (context) => const LeaveRequestView(),
                             ),
                           );
                         }),

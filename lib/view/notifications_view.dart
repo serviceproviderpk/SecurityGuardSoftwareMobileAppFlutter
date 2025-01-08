@@ -33,7 +33,7 @@ class NotificationScreen extends StatelessWidget {
       body: ChangeNotifierProvider(
         create: (_) =>
             NotificationViewModel(apiService: NotificationsApiServices())
-              ..fetchNotifications(98),
+              ..fetchNotifications(),
         child: Consumer<NotificationViewModel>(
           builder: (context, viewModel, _) {
             if (viewModel.isLoading) {

@@ -1,16 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:securitymanagementsystem/resources/ap_url.dart';
 
 import '../models/notifications_model.dart';
 
 class NotificationsApiServices {
   final Dio _dio = Dio();
 
-  Future<List<NotificationModel>> fetchNotifications(int guardId) async {
+  Future<List<NotificationModel>> fetchNotifications() async {
     try {
-      final response = await _dio.get(
-        "https://sss.futureminutes.com/api/MyNotifictions/SystemNotifications",
-        queryParameters: {"GuardId": guardId},
-      );
+      final response = await _dio.get(Endpoint.myNotification);
 
       if (response.statusCode == 200) {
         var data = response.data;

@@ -16,9 +16,9 @@ class NotificationViewModel with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  Future<void> fetchNotifications(int guardId) async {
+  Future<void> fetchNotifications() async {
     try {
-      _notifications = await _apiService.fetchNotifications(guardId);
+      _notifications = await _apiService.fetchNotifications();
     } catch (e) {
       print("Error: $e");
     } finally {

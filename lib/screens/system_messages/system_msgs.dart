@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/Screens/deshboard.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
 import 'package:securitymanagementsystem/providers/card_notifier.dart';
+import 'package:securitymanagementsystem/view/post_notification_view.dart';
 import 'package:securitymanagementsystem/widgets/cards.dart';
 
 import '../../view/inbox_view.dart';
 import '../../widgets/app_bar.dart';
-import 'send_message/sendMessages.dart';
 
 class SystemMessages extends StatelessWidget {
   const SystemMessages({super.key});
@@ -75,7 +75,7 @@ class SystemMessages extends StatelessWidget {
                   ..setAction(
                     () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SendMessagesScreen()));
+                          builder: (context) => PostNotificationView()));
                     },
                   ),
                 child: const CustomCard(),

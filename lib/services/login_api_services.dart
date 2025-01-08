@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:securitymanagementsystem/Resources/ap_url.dart';
-import 'package:securitymanagementsystem/models/login_model.dart';
+import 'package:securitymanagementsystem/models/post_model.dart';
 
 class LogInApiService {
   final Dio _dio = Dio(BaseOptions(
@@ -8,7 +8,7 @@ class LogInApiService {
     headers: {"Content-Type": "application/json"},
   ));
 
-  Future<LogInResponse> validateUser(String email, String password) async {
+  Future<PostResponse> validateUser(String email, String password) async {
     try {
       final response = await _dio.post(
         Endpoint.logIn,
@@ -16,7 +16,7 @@ class LogInApiService {
       );
 
       if (response.statusCode == 200) {
-        return LogInResponse.fromJson(response.data);
+        return PostResponse.fromJson(response.data);
       } else {
         throw Exception(
             "Failed to log in. Status code: ${response.statusCode}");

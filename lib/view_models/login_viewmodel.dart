@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:securitymanagementsystem/models/login_model.dart';
+import 'package:securitymanagementsystem/models/post_model.dart';
 
 import '../services/login_api_services.dart';
 
@@ -8,7 +8,7 @@ class LoginViewModel extends ChangeNotifier {
   bool isLoading = false;
   String message = '';
 
-  Future<LogInResponse?> login(String email, String password) async {
+  Future<PostResponse?> login(String email, String password) async {
     if (email.isEmpty || password.isEmpty) {
       message = "Please fill in all fields.";
       notifyListeners();

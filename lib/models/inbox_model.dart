@@ -1,16 +1,16 @@
-class Message {
+class InboxMessagesModel {
   final String guardName;
   final String alertMessage;
   final String alertDateTime;
 
-  Message({
+  InboxMessagesModel({
     required this.guardName,
     required this.alertMessage,
     required this.alertDateTime,
   });
 
-  factory Message.fromJson(Map<String, dynamic> json) {
-    return Message(
+  factory InboxMessagesModel.fromJson(Map<String, dynamic> json) {
+    return InboxMessagesModel(
       guardName: json['GuardName'] ?? 'Unknown Guard',
       alertMessage: json['AlertMessage'] ?? '',
       alertDateTime: json['AlertDateTime'] ?? '',

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/inbox_viewmodel.dart';
@@ -17,7 +16,7 @@ class InboxView extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       body: Consumer<InboxViewModel>(
-        builder: (context, viewModel, child) {
+        builder: (_, viewModel, child) {
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -53,7 +52,7 @@ class InboxView extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Html(data: message.alertMessage),
+                            Text(message.alertMessage),
                             const SizedBox(height: 5),
                             Align(
                               alignment: Alignment.bottomRight,
