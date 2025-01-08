@@ -12,6 +12,8 @@ class Endpoint {
   static String attendanceDetails = "${baseUrl}MyAttendanceHistory/Details";
   static String postNotification =
       "${baseUrl}SystemMessages/SystemSendMessages";
+  static String myPetrol =
+      "${baseUrl}Patrols/SystemPatrolsV2?GuardId=85&OrganizationId=146&BranchId=154";
   static String myLeaves =
       "${baseUrl}LeaveBalance/MyLeaves?OrganizationID=185&BranchID=186&loginUserId=187";
 }

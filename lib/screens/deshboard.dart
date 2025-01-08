@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/view/attendance_view.dart';
 import 'package:securitymanagementsystem/view/leave_request_view.dart';
 import 'package:securitymanagementsystem/view/my_leaves_view.dart';
+import 'package:securitymanagementsystem/view/my_petrol_view.dart';
 import 'package:securitymanagementsystem/view/my_schedule_view.dart';
 
 import '../providers/card_notifier.dart';
 import '../view/notifications_view.dart';
 import '../widgets/cards.dart';
-import 'my_petrol.dart';
 import 'system_messages/system_msgs.dart';
 import 'visite_website.dart';
 
@@ -82,7 +82,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const myPetrol(),
+                              builder: (context) => const MyPetrolView(),
                             ),
                           );
                         }),
@@ -172,8 +172,8 @@ class Dashboard extends StatelessWidget {
                   Expanded(
                     child: ChangeNotifierProvider(
                       create: (_) => CardNotifier()
-                        ..setTitle("Visit Website")
-                        ..setIcon(Icons.search)
+                        ..setTitle("Help Me")
+                        ..setIcon(Icons.help)
                         ..setAction(() {
                           Navigator.push(
                             context,

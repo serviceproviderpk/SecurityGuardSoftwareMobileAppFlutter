@@ -6,6 +6,7 @@ import 'package:securitymanagementsystem/view_models/inbox_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/leave_request_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/login_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/my_leaves_viewmodel.dart';
+import 'package:securitymanagementsystem/view_models/my_petrol_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/my_schedule_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/password_reset_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/post_notification_viewmodel.dart';
@@ -27,6 +28,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => MyLeavesViewmodel()),
         ChangeNotifierProvider(create: (_) => PostNotificationViewModel()),
         ChangeNotifierProvider(create: (context) => LeaveRequestViewModel()),
+        ChangeNotifierProvider(create: (_) => MyPetrolViewModel()),
       ],
       child: const MyApp(),
     ),
