@@ -122,7 +122,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MyScheduleView(),
+                              builder: (context) => const MyScheduleView(),
                             ),
                           );
                         }),
