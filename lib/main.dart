@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:securitymanagementsystem/providers/app_bar_notifier.dart';
+import 'package:securitymanagementsystem/view/login_view.dart';
 import 'package:securitymanagementsystem/view_models/attendance_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/inbox_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/leave_request_viewmodel.dart';
@@ -10,8 +11,6 @@ import 'package:securitymanagementsystem/view_models/my_petrol_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/my_schedule_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/password_reset_viewmodel.dart';
 import 'package:securitymanagementsystem/view_models/post_notification_viewmodel.dart';
-
-import 'Screens/deshboard.dart';
 
 void main() {
   runApp(
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Dashboard(),
+      home: LoginView(),
     );
   }
 }

@@ -8,9 +8,9 @@ import 'package:securitymanagementsystem/view/my_schedule_view.dart';
 
 import '../providers/card_notifier.dart';
 import '../view/notifications_view.dart';
+import '../view_models/help_me_viewmodel.dart';
 import '../widgets/cards.dart';
 import 'system_messages/system_msgs.dart';
-import 'visite_website.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -42,7 +42,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NotificationScreen(),
+                              builder: (_) => NotificationScreen(),
                             ),
                           );
                         }),
@@ -58,7 +58,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SystemMessages(),
+                              builder: (_) => const SystemMessages(),
                             ),
                           );
                         }),
@@ -82,7 +82,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MyPetrolView(),
+                              builder: (_) => const MyPetrolView(),
                             ),
                           );
                         }),
@@ -98,7 +98,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AttendanceView(),
+                              builder: (_) => const AttendanceView(),
                             ),
                           );
                         }),
@@ -122,7 +122,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MyScheduleView(),
+                              builder: (_) => const MyScheduleView(),
                             ),
                           );
                         }),
@@ -138,7 +138,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MyLeavesView(),
+                              builder: (_) => const MyLeavesView(),
                             ),
                           );
                         }),
@@ -162,7 +162,7 @@ class Dashboard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LeaveRequestView(),
+                              builder: (_) => const LeaveRequestView(),
                             ),
                           );
                         }),
@@ -170,17 +170,37 @@ class Dashboard extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ChangeNotifierProvider(
-                      create: (_) => CardNotifier()
+                    child: ChangeNotifierProvider<CardNotifier>(
+                      create: (context) => CardNotifier()
                         ..setTitle("Help Me")
                         ..setIcon(Icons.help)
-                        ..setAction(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const visitWebsite(),
-                            ),
-                          );
+                        ..setAction(() async {
+                          final helpMeViewModel = HelpMeViewmodel();
+
+                          const orgId = 185;
+                          const branchId = 186;
+                          const userId = 187;
+
+                          await helpMeViewModel.helpRequest(
+                              orgId, branchId, userId);
+
+                          if (context.mounted) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Help Request"),
+                                content: Text(helpMeViewModel.message),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text("OK"),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
                         }),
                       child: const CustomCard(),
                     ),

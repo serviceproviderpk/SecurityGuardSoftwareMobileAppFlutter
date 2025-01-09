@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:securitymanagementsystem/Screens/deshboard.dart';
+import 'package:securitymanagementsystem/view/checked_inout_view.dart';
 
 import '../view_models/login_viewmodel.dart';
 import 'password_reset_view.dart';
@@ -106,7 +106,7 @@ class LoginView extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Dashboard()),
+                                builder: (context) => const CheckInOutScreen()),
                           );
                         } else {
                           showErrorDialog(viewModel.message);
@@ -115,6 +115,30 @@ class LoginView extends StatelessWidget {
                       label: const Text('Login'),
                     ),
                   ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () async {
+                emailController.text = 'sg@serviceprovider.pk';
+                passwordController.text = '123';
+
+                final demoResponse = await viewModel.login(
+                    emailController.text, passwordController.text);
+
+                if (demoResponse != null && demoResponse.isSuccess) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CheckInOutScreen()),
+                  );
+                } else {
+                  showErrorDialog(viewModel.message);
+                }
+              },
+              child: const Text(
+                'Try Demo!',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
           ],
         ),
       ),

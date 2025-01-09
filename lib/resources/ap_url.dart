@@ -7,6 +7,7 @@ class Endpoint {
       "${baseUrl}MyNotifictions/SystemNotifications?GuardId=98";
   static String mySchedule = "${baseUrl}Schedules/GuardSchedules?GuardId=98";
   static String myAttendance = "${baseUrl}CheckInOut/SystemCheckInOut";
+  static String helpMeCall = "${baseUrl}HelpMe/Sendnow";
   static String inboxMessages =
       "${baseUrl}SystemMessages/MyMessages?GuardId=98";
   static String attendanceDetails = "${baseUrl}MyAttendanceHistory/Details";
