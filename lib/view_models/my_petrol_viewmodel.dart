@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:securitymanagementsystem/services/my_petrol_api_service.dart';
+
+import '../services/my_petrol_api_service.dart';
 
 class MyPetrolViewModel extends ChangeNotifier {
   final MyPetrolApiService _apiService = MyPetrolApiService();
   bool isLoading = false;
   String message = '';
 
-  Future<void> myPetrol(int guardId, int orgId, int branchId) async {
+  Future<void> myPetrol() async {
     isLoading = true;
     message = '';
     notifyListeners();
 
     try {
-      final response = await _apiService.validateUser(guardId, orgId, branchId);
-      if (response != null && response.isSuccess) {
-        message = response.message;
+      final response = await _apiService.myPetrol();
+      if (response.isSuccess) {
+        message = response.message; // Set success message.
       } else {
-        message = response?.message ?? 'An error occurred';
+        message = response.message ??
+            'Unexpected error occurred.'; // Set error message.
       }
     } catch (e) {
-      message = "Error: $e";
+      message = "Error: $e"; // Set exception message.
     } finally {
       isLoading = false;
       notifyListeners();

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Resources/ap_url.dart';
 import '../models/attendance_model.dart';
@@ -11,12 +12,21 @@ class AttendanceApiService {
 
   Future<List<Attendance>> fetchAttendanceData() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final int organizationId = prefs.getInt('Organization_ID') ?? 0;
+      final int branchId = prefs.getInt('Branch_ID') ?? 0;
+      final int usersProfileId = prefs.getInt('UsersProfile_ID') ?? 0;
+
+      if (organizationId == 0 || branchId == 0 || usersProfileId == 0) {
+        throw Exception("Error: Missing required data in SharedPreferences");
+      }
+
       final response = await _dio.get(
         Endpoint.attendanceDetails,
         queryParameters: {
-          "OrganizationId": 185,
-          "BranchId": 186,
-          "UsersProfileId": 187,
+          "OrganizationId": organizationId,
+          "BranchId": branchId,
+          "UsersProfileId": usersProfileId,
         },
       );
 

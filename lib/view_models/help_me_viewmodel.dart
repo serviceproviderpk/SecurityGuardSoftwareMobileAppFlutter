@@ -12,15 +12,13 @@ class HelpMeViewmodel extends ChangeNotifier {
 
   String get message => _message;
 
-  Future<void> helpRequest(int orgId, int branchId, int userId) async {
+  Future<void> helpRequest() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      // Get HelpMeModel data from API service
-      final response = await _apiService.askHelp(orgId, branchId, userId);
+      final response = await _apiService.askHelp();
 
-      // Update message based on the response
       _message = response.message;
     } catch (e) {
       _message = "Failed to send Help Request: $e";

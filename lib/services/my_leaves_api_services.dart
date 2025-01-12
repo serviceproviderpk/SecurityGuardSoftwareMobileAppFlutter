@@ -1,13 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:securitymanagementsystem/models/my_leaves_model.dart';
 import 'package:securitymanagementsystem/resources/ap_url.dart';
+import 'package:securitymanagementsystem/services/class/local_class.dart';
 
 class MyLeavesApiServices {
   final Dio _dio = Dio();
 
   Future<List<MyLeavesModel>> fetchLeaveData() async {
-    final url = Endpoint.myLeaves;
     try {
+      final int OrganizationId = await LocalStorage.getOrganizationId();
+      final int BranchId = await LocalStorage.getGuardId();
+      final int LogInUserId = await LocalStorage.getLoginUserId();
+
+      final String url =
+          "${Endpoint.myLeaves}?OrganizationID=$OrganizationId&BranchID=$BranchId&loginUserId=$LogInUserId";
       final response = await _dio.get(url);
 
       if (response.statusCode == 200) {

@@ -102,17 +102,11 @@ class _LeaveRequestViewState extends State<LeaveRequestView> {
                     toDate != null &&
                     reasonController.text.isNotEmpty &&
                     selectedLeaveType != null) {
-                  const int scheduleId = 93;
-                  const int profileId = 187;
-                  const int guardId = 98;
                   int workingDays =
                       int.tryParse(workingDaysController.text) ?? 0;
                   await context
                       .read<LeaveRequestViewModel>()
                       .submitLeaveRequest(
-                        scheduleId,
-                        profileId,
-                        guardId,
                         reasonController.text,
                         fromDate!,
                         toDate!,

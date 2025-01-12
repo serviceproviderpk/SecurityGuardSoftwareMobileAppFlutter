@@ -16,7 +16,9 @@ class AttendanceView extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: viewModel.fetchAttendanceData,
+            onPressed: () {
+              context.read<AttendanceViewModel>().fetchAttendanceData();
+            },
           ),
         ],
       ),

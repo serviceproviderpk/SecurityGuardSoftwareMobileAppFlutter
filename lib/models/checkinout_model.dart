@@ -1,16 +1,19 @@
 class CheckInOutResponse {
-  final String message;
-  final bool success;
+  final bool isSuccess;
+  final String? message;
+  final String content;
 
   CheckInOutResponse({
-    required this.message,
-    required this.success,
+    required this.isSuccess,
+    this.message,
+    required this.content,
   });
 
   factory CheckInOutResponse.fromJson(Map<String, dynamic> json) {
     return CheckInOutResponse(
-      message: json['Message'],
-      success: json['IsSuccess'] ?? false,
+      isSuccess: json["IsSuccess"] ?? false,
+      message: json["Message"] ?? "No message provided",
+      content: json["Content"] ?? "No content available",
     );
   }
 }

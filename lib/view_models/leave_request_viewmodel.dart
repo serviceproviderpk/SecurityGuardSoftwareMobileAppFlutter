@@ -17,9 +17,6 @@ class LeaveRequestViewModel extends ChangeNotifier {
 
   // leave request
   Future<void> submitLeaveRequest(
-    int scheduleId,
-    int profileId,
-    int guardId,
     String reason,
     DateTime fromDate,
     DateTime toDate,
@@ -32,9 +29,6 @@ class LeaveRequestViewModel extends ChangeNotifier {
 
       // API request
       PostResponse response = await _leaveRequestApiService.postNotification(
-        scheduleId,
-        profileId,
-        guardId,
         reason,
         fromDate,
         toDate,

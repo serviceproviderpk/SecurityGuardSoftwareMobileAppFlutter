@@ -1,24 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:securitymanagementsystem/Resources/ap_url.dart';
 import 'package:securitymanagementsystem/models/post_model.dart';
+import 'package:securitymanagementsystem/services/class/local_class.dart';
 
 class MyPetrolApiService {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: Endpoint.baseUrl,
-    headers: {"Content-Type": "application/json"},
+    headers: {
+      "Content-Type": "application/json",
+    },
   ));
 
-  Future<PostResponse> validateUser(
-      int guardId, int orgId, int branchId) async {
+  Future<PostResponse> myPetrol() async {
     try {
-      final response = await _dio.post(
-        'https://sss.futureminutes.com/api/Patrols/SystemPatrolsV2?GuardId=85&OrganizationId=146&BranchId=154',
-        data: {
-          "GuardId": guardId,
-          "OrganizationId": orgId,
-          "BranchId": branchId
-        },
-      );
+      final int organizationId = await LocalStorage.getOrganizationId();
+      final int guardId = await LocalStorage.getGuardId();
+      print('gaurd: $guardId');
+      final int branchId = await LocalStorage.getBranchId();
+
+      final String url =
+          "${Endpoint.myPetrol}?GuardId=$guardId&OrganizationId=$organizationId&BranchId=$branchId";
+      final response = await _dio.post(url);
 
       if (response.statusCode == 200) {
         return PostResponse.fromJson(response.data);

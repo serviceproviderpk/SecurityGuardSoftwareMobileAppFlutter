@@ -36,7 +36,7 @@ class Dashboard extends StatelessWidget {
                   Expanded(
                     child: ChangeNotifierProvider(
                       create: (_) => CardNotifier()
-                        ..setTitle("Your Notifications")
+                        ..setTitle("System Notifications")
                         ..setIcon(Icons.notifications)
                         ..setAction(() {
                           Navigator.push(
@@ -52,7 +52,7 @@ class Dashboard extends StatelessWidget {
                   Expanded(
                     child: ChangeNotifierProvider(
                       create: (_) => CardNotifier()
-                        ..setTitle("System Messages")
+                        ..setTitle("Your Messages")
                         ..setIcon(Icons.notification_important)
                         ..setAction(() {
                           Navigator.push(
@@ -176,14 +176,7 @@ class Dashboard extends StatelessWidget {
                         ..setIcon(Icons.help)
                         ..setAction(() async {
                           final helpMeViewModel = HelpMeViewmodel();
-
-                          const orgId = 185;
-                          const branchId = 186;
-                          const userId = 187;
-
-                          await helpMeViewModel.helpRequest(
-                              orgId, branchId, userId);
-
+                          await helpMeViewModel.helpRequest();
                           if (context.mounted) {
                             showDialog(
                               context: context,
@@ -204,7 +197,7 @@ class Dashboard extends StatelessWidget {
                         }),
                       child: const CustomCard(),
                     ),
-                  ),
+                  )
                 ],
               ),
             ],

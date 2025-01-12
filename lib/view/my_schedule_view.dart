@@ -61,9 +61,6 @@ class _MyScheduleViewState extends State<MyScheduleView> {
           }
 
           final dateFormatter = DateFormat('dd/MM/yyyy hh:mm a');
-
-          final timeFormatter = DateFormat('hh:mm a');
-
           return ListView.builder(
             itemCount: viewModel.schedules.length,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -103,12 +100,12 @@ class _MyScheduleViewState extends State<MyScheduleView> {
                       ),
                       const Divider(),
                       Text(
-                        'From: ${dateFormatter.format(schedule.dateFrom)}',
+                        'From: ${schedule.dateFrom != null ? dateFormatter.format(schedule.dateFrom!) : 'Not Available'}',
                         style: const TextStyle(
                             fontSize: 14, color: Colors.black54),
                       ),
                       Text(
-                        'To: ${dateFormatter.format(schedule.dateTo)}',
+                        'To: ${schedule.dateTo != null ? dateFormatter.format(schedule.dateTo!) : 'Not Available'}',
                         style: const TextStyle(
                             fontSize: 14, color: Colors.black54),
                       ),

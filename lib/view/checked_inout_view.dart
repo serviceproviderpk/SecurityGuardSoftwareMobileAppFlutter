@@ -19,6 +19,31 @@ class CheckInOutScreen extends StatelessWidget {
           builder: (context, viewModel, child) {
             if (viewModel.message.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text(
+                        "Alert!",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      content: Text(viewModel.content.isNotEmpty
+                          ? viewModel.content
+                          : "No additional information"),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                // Show a Snackbar with the message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(viewModel.message)),
                 );
@@ -51,9 +76,7 @@ class CheckInOutScreen extends StatelessWidget {
                   indent: 30.0,
                   endIndent: 30.0,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 // Dashboard button
                 Align(
                   alignment: Alignment.topLeft,
@@ -78,10 +101,8 @@ class CheckInOutScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // Status message display (Optional)
+                const SizedBox(height: 20),
+                // Loading state
                 if (viewModel.isLoading) ...[
                   const CircularProgressIndicator(),
                   const SizedBox(height: 10),

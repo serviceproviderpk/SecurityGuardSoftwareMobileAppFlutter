@@ -1,17 +1,23 @@
 import 'package:dio/dio.dart';
 
 import '../Resources/ap_url.dart';
+import 'class/local_class.dart';
 
 class CheckInOutApiService {
-  final Dio dio = Dio(); // Dio instance
+  final Dio dio = Dio();
   final String baseUrl = Endpoint.checkInOut;
 
   Future<Map<String, dynamic>> checkInOut({
-    required int organizationId,
-    required int branchId,
-    required int loginUserId,
     required String checkInOutType,
   }) async {
+    final int organizationId = await LocalStorage.getOrganizationId();
+    final int branchId = await LocalStorage.getBranchId();
+    final int loginUserId = await LocalStorage.getLoginUserId();
+
+    if (organizationId == 0 || branchId == 0 || loginUserId == 0) {
+      throw Exception("Error: Missing data from SharedPreferences");
+    }
+
     final String url =
         "$baseUrl?OrganizationId=$organizationId&BranchId=$branchId&LoginUserId=$loginUserId";
 

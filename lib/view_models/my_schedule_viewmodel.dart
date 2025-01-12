@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../models/my_schedule_model.dart';
 import '../services/my_schedules_api_service.dart';
 
 class MyScheduleViewModel extends ChangeNotifier {
-  final MyScheduleApiService _apiService = MyScheduleApiService();
+  final MySchedulesApiService _apiService = MySchedulesApiService();
 
   List<MyScheduleModel> _schedules = [];
   bool _isLoading = false;
@@ -22,9 +22,10 @@ class MyScheduleViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _schedules = await _apiService.fetchMessages();
+      _schedules = await _apiService.fetchMySchedule();
     } catch (e) {
       _errorMessage = e.toString();
+      _schedules = []; // Clear schedules on error
     } finally {
       _isLoading = false;
       notifyListeners();

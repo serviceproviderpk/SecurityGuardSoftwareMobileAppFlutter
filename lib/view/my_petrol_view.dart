@@ -26,16 +26,17 @@ class MyPetrolView extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () async {
-                const int guardId = 85;
-                const int orgId = 146;
-                const int branchId = 154;
-
-                await context
-                    .read<MyPetrolViewModel>()
-                    .myPetrol(guardId, orgId, branchId);
+                await context.read<MyPetrolViewModel>().myPetrol();
                 final message = context.read<MyPetrolViewModel>().message;
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(message)),
+                  SnackBar(
+                    content: Text(
+                      message.isNotEmpty
+                          ? 'Success: $message'
+                          : "An error occurred",
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -45,20 +46,21 @@ class MyPetrolView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
-                elevation: 10, // Shadow effect
+                elevation: 10,
               ),
               icon: const Icon(Icons.send, size: 24, color: Colors.white),
               label: const Text(
                 'Send Request',
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ), // Text
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             Consumer<MyPetrolViewModel>(
-              builder: (context, viewModel, child) {
+              builder: (_, viewModel, child) {
                 if (viewModel.isLoading) {
                   return const CircularProgressIndicator();
                 }
