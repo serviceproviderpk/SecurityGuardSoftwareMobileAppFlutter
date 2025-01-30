@@ -14,7 +14,6 @@ class SystemMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // calling and setting the notifier
     final appBarNotifier = Provider.of<AppBarNotifier>(context, listen: false);
 
     appBarNotifier.setTitle('System Messages');

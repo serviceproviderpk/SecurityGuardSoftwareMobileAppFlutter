@@ -12,13 +12,12 @@ class HelpMeModel {
     required this.long,
   });
 
-  // Factory method to create a PostResponse object from JSON
   factory HelpMeModel.fromJson(Map<String, dynamic> json) {
     return HelpMeModel(
-      message: json['Message'] ?? '', // Handle null or missing fields
-      address: json['address'] ?? '', // Handle null or missing fields
-      lat: json['lati'] ?? 0, // Default value for lat
-      long: json['longi'] ?? 0, // Default value for long
+      message: json['Message'] ?? '',
+      address: json['address'] ?? '',
+      lat: json['lati'] ?? 0,
+      long: json['longi'] ?? 0,
     );
   }
 

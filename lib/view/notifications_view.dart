@@ -35,7 +35,7 @@ class NotificationScreen extends StatelessWidget {
             NotificationViewModel(apiService: NotificationsApiServices())
               ..fetchNotifications(),
         child: Consumer<NotificationViewModel>(
-          builder: (context, viewModel, _) {
+          builder: (ctx, viewModel, _) {
             if (viewModel.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
@@ -44,7 +44,7 @@ class NotificationScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: ListView.builder(
                 itemCount: viewModel.notifications.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   var notification = viewModel.notifications[index];
                   return Card(
                     margin: const EdgeInsets.all(10),

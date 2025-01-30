@@ -29,7 +29,7 @@ class _MyScheduleViewState extends State<MyScheduleView> {
         backgroundColor: Colors.blueAccent,
       ),
       body: Consumer<MyScheduleViewModel>(
-        builder: (context, viewModel, child) {
+        builder: (_, viewModel, child) {
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -64,7 +64,7 @@ class _MyScheduleViewState extends State<MyScheduleView> {
           return ListView.builder(
             itemCount: viewModel.schedules.length,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            itemBuilder: (context, index) {
+            itemBuilder: (ctx, index) {
               final schedule = viewModel.schedules[index];
               return Card(
                 elevation: 3,

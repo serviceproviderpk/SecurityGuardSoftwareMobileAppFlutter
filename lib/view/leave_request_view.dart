@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../services/my_schedules_api_service.dart';
 import '../view_models/leave_request_viewmodel.dart';
 
 class LeaveRequestView extends StatefulWidget {
@@ -19,6 +20,8 @@ class _LeaveRequestViewState extends State<LeaveRequestView> {
   int? selectedLeaveType;
   TextEditingController reasonController = TextEditingController();
   TextEditingController workingDaysController = TextEditingController();
+
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class _LeaveRequestViewState extends State<LeaveRequestView> {
               child: Text(
                 toDate == null
                     ? 'Select To Date'
-                    : 'To Date: ${toDate!.toLocal()}'.split(' ')[0],
+                    : 'Selected: ${toDate!.toLocal()}'.split(' ')[0],
               ),
             ),
             TextField(
@@ -96,46 +99,54 @@ class _LeaveRequestViewState extends State<LeaveRequestView> {
               }).toList(),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                if (fromDate != null &&
-                    toDate != null &&
-                    reasonController.text.isNotEmpty &&
-                    selectedLeaveType != null) {
-                  int workingDays =
-                      int.tryParse(workingDaysController.text) ?? 0;
-                  await context
-                      .read<LeaveRequestViewModel>()
-                      .submitLeaveRequest(
-                        reasonController.text,
-                        fromDate!,
-                        toDate!,
-                        selectedLeaveType!,
-                        workingDays,
-                      );
 
-                  final responseMessage =
-                      context.read<LeaveRequestViewModel>().message;
+            if (_isLoading)
+              const CircularProgressIndicator()
+            else
+              ElevatedButton(
+                onPressed: () async {
+                  if (fromDate != null &&
+                      toDate != null &&
+                      reasonController.text.isNotEmpty &&
+                      selectedLeaveType != null) {
+                    await MySchedulesApiService().fetchMySchedule();
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(responseMessage)),
-                  );
-                  setState(() {
-                    reasonController.clear();
-                    workingDaysController.clear();
-                    selectedValue = null;
-                    selectedLeaveType = null;
-                    fromDate = null;
-                    toDate = null;
-                  });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Please fill in all fields.')),
-                  );
-                }
-              },
-              child: const Text('Apply Leave'),
-            ),
+                    int workingDays =
+                        int.tryParse(workingDaysController.text) ?? 0;
+
+                    await context
+                        .read<LeaveRequestViewModel>()
+                        .submitLeaveRequest(
+                          reasonController.text,
+                          fromDate!,
+                          toDate!,
+                          selectedLeaveType!,
+                          workingDays,
+                        );
+
+                    final responseMessage =
+                        context.read<LeaveRequestViewModel>().message;
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(responseMessage)),
+                    );
+                    setState(() {
+                      reasonController.clear();
+                      workingDaysController.clear();
+                      selectedValue = null;
+                      selectedLeaveType = null;
+                      fromDate = null;
+                      toDate = null;
+                    });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Please fill in all fields.')),
+                    );
+                  }
+                },
+                child: const Text('Apply Leave'),
+              )
           ],
         ),
       ),

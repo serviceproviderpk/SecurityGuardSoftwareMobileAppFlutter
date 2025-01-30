@@ -21,7 +21,7 @@ class LocalStorage {
     return prefs.getInt('Guards_ID') ?? 0;
   }
 
-  static Future<int> scheduleId() async {
+  static Future<int> getScheduleId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt('ScheduleDetailId') ?? 0;
   }

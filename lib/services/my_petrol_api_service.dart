@@ -14,7 +14,6 @@ class MyPetrolApiService {
     try {
       final int organizationId = await LocalStorage.getOrganizationId();
       final int guardId = await LocalStorage.getGuardId();
-      print('gaurd: $guardId');
       final int branchId = await LocalStorage.getBranchId();
 
       final String url =

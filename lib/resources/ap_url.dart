@@ -18,4 +18,5 @@ class Endpoint {
       "${baseUrl}SystemMessages/SystemSendMessages";
   static String myPetrol = "${baseUrl}Patrols/SystemPatrolsV2";
   static String myLeaves = "${baseUrl}LeaveBalance/MyLeaves";
+  static String applyLeaves = "${baseUrl}ApplyLeave/LeaveRequest";
 }

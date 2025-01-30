@@ -26,10 +26,10 @@
 
             <data android:mimeType="text/plain" />
         </intent>
-    </queries>
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    </queries> <!-- location permission -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <permission
         android:name="com.example.securitymanagementsystem.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -43,7 +43,8 @@
         android:debuggable="true"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="securitymanagementsystem" >
+        android:label="securitymanagementsystem"
+        android:requestLegacyExternalStorage="true" >
         <activity
             android:name="com.example.securitymanagementsystem.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -79,10 +80,22 @@
             android:value="2" />
 
         <service
+            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+        <service
             android:name="com.lyokone.location.FlutterLocationService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
 
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
@@ -92,13 +105,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <uses-library
-            android:name="androidx.window.extensions"
-            android:required="false" />
-        <uses-library
-            android:name="androidx.window.sidecar"
-            android:required="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

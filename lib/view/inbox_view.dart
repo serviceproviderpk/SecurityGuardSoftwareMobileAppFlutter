@@ -27,7 +27,7 @@ class InboxView extends StatelessWidget {
 
           return ListView.builder(
             itemCount: viewModel.messages.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (ctx, index) {
               final message = viewModel.messages[index];
               return Card(
                 margin:

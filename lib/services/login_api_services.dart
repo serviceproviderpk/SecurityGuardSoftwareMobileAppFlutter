@@ -27,7 +27,6 @@ class LogInApiService {
           await prefs.setInt('Branch_ID', content['Branch_ID']);
           await prefs.setInt('UsersProfile_ID', content['UsersProfile_ID']);
           await prefs.setInt('Guards_ID', content['Guards_ID']);
-
           return postResponse;
         } else {
           throw Exception('Login failed: ${postResponse.message}');

@@ -37,6 +37,14 @@ class LoginView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // main logo
+            Image.asset(
+              'assets/icons/logo.png',
+              width: 144,
+              height: 144,
+              fit: BoxFit.contain,
+            ),
+
             // Email TextField
             TextField(
               controller: emailController,

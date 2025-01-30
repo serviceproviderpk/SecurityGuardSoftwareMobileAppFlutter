@@ -25,7 +25,7 @@ class MyScheduleViewModel extends ChangeNotifier {
       _schedules = await _apiService.fetchMySchedule();
     } catch (e) {
       _errorMessage = e.toString();
-      _schedules = []; // Clear schedules on error
+      _schedules = [];
     } finally {
       _isLoading = false;
       notifyListeners();

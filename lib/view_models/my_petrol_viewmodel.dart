@@ -15,13 +15,13 @@ class MyPetrolViewModel extends ChangeNotifier {
     try {
       final response = await _apiService.myPetrol();
       if (response.isSuccess) {
-        message = response.message; // Set success message.
+        message = response.message;
       } else {
         message = response.message ??
-            'Unexpected error occurred.'; // Set error message.
+            'Unexpected error occurred.';
       }
     } catch (e) {
-      message = "Error: $e"; // Set exception message.
+      message = "Error: $e";
     } finally {
       isLoading = false;
       notifyListeners();

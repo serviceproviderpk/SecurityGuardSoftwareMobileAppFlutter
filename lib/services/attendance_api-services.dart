@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:securitymanagementsystem/services/class/local_class.dart';
 
 import '../Resources/ap_url.dart';
 import '../models/attendance_model.dart';
@@ -12,23 +12,17 @@ class AttendanceApiService {
 
   Future<List<Attendance>> fetchAttendanceData() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final int organizationId = prefs.getInt('Organization_ID') ?? 0;
-      final int branchId = prefs.getInt('Branch_ID') ?? 0;
-      final int usersProfileId = prefs.getInt('UsersProfile_ID') ?? 0;
+      final int organizationId = await LocalStorage.getOrganizationId();
+      final int branchId = await LocalStorage.getBranchId();
+      final int usersProfileId = await LocalStorage.getLoginUserId();
 
       if (organizationId == 0 || branchId == 0 || usersProfileId == 0) {
         throw Exception("Error: Missing required data in SharedPreferences");
       }
 
-      final response = await _dio.get(
-        Endpoint.attendanceDetails,
-        queryParameters: {
-          "OrganizationId": organizationId,
-          "BranchId": branchId,
-          "UsersProfileId": usersProfileId,
-        },
-      );
+      final String url =
+          "${Endpoint.attendanceDetails}?OrganizationId=$organizationId&BranchId=$branchId&UsersProfileId=$usersProfileId";
+      final response = await _dio.get(url);
 
       if (response.statusCode == 200) {
         final data = response.data;

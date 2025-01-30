@@ -9,10 +9,9 @@ class LeaveRequestApiService {
   final Dio _dio = Dio(BaseOptions(
     baseUrl: Endpoint.baseUrl,
     headers: {"Content-Type": "application/json"},
-  ))
-    ..interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  ));
 
-  Future<PostResponse> postNotification(
+  Future<PostResponse> applyLeave(
     String reason,
     DateTime fromDate,
     DateTime toDate,
@@ -20,17 +19,19 @@ class LeaveRequestApiService {
     int workingDays,
   ) async {
     try {
-      final int scheduleId = await LocalStorage.scheduleId();
       final int profileId = await LocalStorage.getLoginUserId();
       final int guardId = await LocalStorage.getGuardId();
-      print('guard: $guardId');
+
+      final prefs = await SharedPreferences.getInstance();
+      final int scheduleId = prefs.getInt('ScheduleDetailId') ?? 0;
+      print('scheduleId $scheduleId');
 
       final response = await _dio.post(
         'https://sss.futureminutes.com/api/ApplyLeave/LeaveRequest',
         data: {
           "ScheduleDetailId": scheduleId,
-          "UserId": profileId,
-          "GuardId": guardId,
+          "UsersProfile_ID": profileId,
+          "Guards_ID": guardId,
           "ReasonOfLeave": reason,
           "FromDate": fromDate.toIso8601String(),
           "ToDate": toDate.toIso8601String(),
@@ -40,16 +41,10 @@ class LeaveRequestApiService {
       );
 
       if (response.statusCode == 200) {
-        final postResponse = PostResponse.fromJson(response.data);
-        if (postResponse.isSuccess) {
-          final content = postResponse.content;
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setInt("ScheduleDetailId", content['ScheduleDetailId']);
-        }
-        return postResponse; // Ensure returning the response
+        return PostResponse.fromJson(response.data);
       } else {
         throw Exception(
-            "Failed to post notification. Status code: ${response.statusCode}");
+            "Failed to post leave request. Status code: ${response.statusCode}");
       }
     } catch (e) {
       print('Dio error: $e');
@@ -57,7 +52,7 @@ class LeaveRequestApiService {
         isSuccess: false,
         message: "Error: $e",
         content: null,
-      ); // Return a default/failure PostResponse on error
+      );
     }
   }
 }

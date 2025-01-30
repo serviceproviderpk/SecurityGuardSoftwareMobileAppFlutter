@@ -1,4 +1,5 @@
 class MyScheduleModel {
+  final int scheduleId;
   final String guardName;
   final DateTime? dateFrom;
   final DateTime? dateTo;
@@ -9,6 +10,7 @@ class MyScheduleModel {
   final String shiftEndTime;
 
   MyScheduleModel({
+    required this.scheduleId,
     required this.guardName,
     this.dateFrom,
     this.dateTo,
@@ -21,6 +23,7 @@ class MyScheduleModel {
 
   factory MyScheduleModel.fromJson(Map<String, dynamic> json) {
     return MyScheduleModel(
+      scheduleId: json['ScheduleDetailId'] ?? 0,
       guardName: json['GuardName'] ?? 'Unknown',
       dateFrom:
           json['DateFrom'] != null ? DateTime.tryParse(json['DateFrom']) : null,

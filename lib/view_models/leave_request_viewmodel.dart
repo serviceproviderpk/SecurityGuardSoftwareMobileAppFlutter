@@ -28,7 +28,7 @@ class LeaveRequestViewModel extends ChangeNotifier {
       notifyListeners();
 
       // API request
-      PostResponse response = await _leaveRequestApiService.postNotification(
+      PostResponse response = await _leaveRequestApiService.applyLeave(
         reason,
         fromDate,
         toDate,

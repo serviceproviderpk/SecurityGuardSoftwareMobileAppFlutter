@@ -16,34 +16,9 @@ class CheckInOutScreen extends StatelessWidget {
       create: (_) => CheckInOutViewModel(),
       child: Scaffold(
         body: Consumer<CheckInOutViewModel>(
-          builder: (context, viewModel, child) {
+          builder: (_, viewModel, child) {
             if (viewModel.message.isNotEmpty) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text(
-                        "Alert!",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      content: Text(viewModel.content.isNotEmpty
-                          ? viewModel.content
-                          : "No additional information"),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text("OK"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-
-                // Show a Snackbar with the message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(viewModel.message)),
                 );

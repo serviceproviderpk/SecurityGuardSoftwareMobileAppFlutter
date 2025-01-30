@@ -35,7 +35,7 @@ class AttendanceView extends StatelessWidget {
                   onRefresh: viewModel.fetchAttendanceData,
                   child: ListView.builder(
                     itemCount: viewModel.attendanceList.length,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (ctx, index) {
                       final attendance = viewModel.attendanceList[index];
 
                       return Card(
